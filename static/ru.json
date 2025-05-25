@@ -3,10 +3,18 @@
 "Digital art | Editing": "Цифровое искусство | Редактирование",
 "Portfolio": "Портфолио",
 "About": "Обо мне",
+"Русский": "Русский",
+"English": "English",
 "About me": "Обо мне",
+"Commissions": "Заказы",
 "Contact info": "Контакты",
+"Sketch": "Скетч",
+"Flat Colour": "Плоский цвет",
+"Light Render": "Легкий рендер",
+"Full Render": "Полный рендер",
 "My Work": "Мои работы",
 "Contact info:": "Контактная информация:",
-"Email:": "Почта: ",
-"Phone:": "Телефон: "
+"Email: ": "Почта: ",
+"Phone: ": "Телефон: ",
+"&&Some texts are unfinished, please check the code.": "&&Некоторые тексты не закончены, пожалуйста, проверьте код."
 }

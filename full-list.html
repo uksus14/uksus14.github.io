@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>Full list of artwork</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                color: #333;
+                padding: 10px;
+            }
+            #gallery {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .row {
+                display: flex;
+                justify-content: space-around;
+                gap: 10px;
+            }
+            .row img {
+                display: block;
+                object-fit: cover;
+                border-radius: 6px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="gallery"></div>
+        <script>
+            const gallery = document.getElementById('gallery');
+            fetch('static/images-list.json').then(res => res.json())
+                .then(data => buildRows(data, bestLayout(data)))
+                .catch(error => console.error('There was a problem with the fetch operation:', error));
+            const getRatio = row => row.reduce((acc, image) => acc + image.width / image.height, 0);
+            const getHeight = row => gallery.clientWidth/getRatio(row);
+            function buildImage(filename) {
+                const img = document.createElement('img');
+                img.src = `static/images/${filename}`;
+                img.alt = filename;
+                img.style.height = '100%';
+                return img;
+            }function buildRow(row) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'row';
+                rowDiv.style.height = `${getHeight(row)}px`;
+                row.forEach(image => rowDiv.appendChild(buildImage(image.filename)));
+                return rowDiv;
+            }function buildRows(data, layout) {
+                let used = 0;
+                for (let rowSize of layout) {
+                    gallery.appendChild(buildRow(data.slice(used, used + rowSize)));
+                    used += rowSize;
+                }
+            }function bestLayout(data) {
+                if (data.length == 0) return [];
+                if (data.length == 1) return [1];
+                for (let i of [3, 2, 4, 5, 1]) {
+                    if (i > data.length) continue;
+                    const next = bestLayout(data.slice(i));
+                    if (next == -1) continue;
+                    const row = data.slice(0, i);
+                    const heights = row.map(image => image.height);
+                    const rowHeight = getHeight(row);
+                    if (rowHeight > Math.min(...heights)) continue;
+                    if (Math.max(...heights)/rowHeight > 4 && i != 1) continue;
+                    return [i, ...next];
+                }return -1;
+            }
+        </script>
+    </body>
+</html>

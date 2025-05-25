@@ -1,86 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Artist Portfolio</title>
-  <link rel="stylesheet" href="static/style.css">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Odor+Mean+Chey&display=swap" rel="stylesheet">
+    <title>Artist Portfolio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --gold: #ffc955;
+            --dark-blue: #0e0832;
+            --light-blue: #1b2394;
+            --text: #b8c6ce;
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(12vh - 1px);
+        }
+        html {
+            background-color: #293946;
+        }
+        .en-font{
+            font-family: "Odor Mean Chey", serif;
+        }
+        .ru-font{
+            font-family: "Comic Sans MS", serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        #devUnfinishedWarning {
+            display: none;
+            text-align: center;
+            position: fixed;
+            width: 100vw;
+            top: 50px;
+            z-index: 1000;
+        }
+        .header {
+            height: 12vh;
+            width: 100vw;
+        }
+        header {
+            font-size: 1.3rem;
+            position: fixed;
+            display: flex;
+            gap: 0;
+            justify-content: center;
+            background-color: transparent;
+            z-index: 100;
+        }
+        header a {
+            text-decoration: none;
+            transition: all .3s;
+        }
+        header a * {
+            color: var(--text);
+            fill: var(--text);
+        }
+        header .highlight * {
+            color: var(--gold);
+            fill: var(--gold)
+        }
+        header a:hover * {
+            color: var(--gold);
+            fill: var(--gold)
+        }
+        header div {
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }            
+        header svg {
+            display: none;
+            width: 2rem;
+            height: auto;
+            fill: var(--text);
+        }
+        header span {
+            position: relative;
+            top: -.1rem;
+        }
+        header span::after {
+            width: 0;
+            height: 2px;
+            content: '';
+            position: absolute;
+            background: #fff;
+            left: 0;
+            bottom: 0;
+            transition: all .3s;
+        }
+        .highlight span::after {
+            width: 100%;
+            background: var(--gold);
+        }
+        #header-bg {
+            position: sticky;
+            top: 0;
+            background: var(--dark-blue);
+            z-index: 99;
+        }
+        section#about {
+            height: 100dvh;
+            background-image: url('static/images/alena wide.png');
+            background-size: cover;
+            background-position: center;
+        }
+        section#about h2 {
+            color: var(--gold)
+        }
+        section {
+            width: 100vw;
+        }
+        .subsection {
+            width: 100vw;
+            font-size: x-large;
+            background: #1a1d48;
+        }
+        .subsection.right, .subsection.left {
+            width: min(800px, 100vw);
+        }
+        .subsection.right {
+            border-left: 4px solid var(--gold);
+            margin-left: auto;
+        }
+        .subsection.left {
+            border-right: 4px solid var(--gold);
+            margin-right: auto;
+        }
+        #portfolio {
+            background: var(--light-blue);
+            padding: 2rem 0;
+        }
+        #portfolio br {
+            margin: 1rem 0;
+        }
+        .headline {
+            display: flex;
+            color: var(--gold);
+            justify-content: space-between;
+            padding: 0 2rem;
+            margin: 1rem 0; 
+        }
+        .artfield {
+            position: relative;
+            padding: 15px;
+            height: 400px;
+        }
+        .artfield img {
+            position: absolute;
+        }
+        #full-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        #full-list img {
+            margin: 10px;
+            height: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        #jesustiger {
+            width: 30%;
+            bottom: 10%;
+            left: 3%;
+        }
+        #sliceoflife {
+            width: 30%;
+            bottom: 10%;
+            left: 35%;
+        }
+        #fremine {
+            width: 30%;
+            bottom: 10%;
+            left: 67%;
+        }
+        @media (max-width: 800px) {
+            section#about {
+                background-image: url('static/images/alena high.png');
+            }
+        }
+        @media (max-width: 500px) {
+            #jesustiger {
+                width: 40%;
+                top: 0;
+                left: 5%;
+            }
+            #sliceoflife {
+                width: 40%;
+                bottom: 10%;
+                left: 5%;
+            }
+            #fremine {
+                width: 40%;
+                bottom: 10%;
+                left: 55%;
+            }
+        }
+        @media (max-aspect-ratio: 1/1) {
+            :root {
+                scroll-padding-top: 0;
+            }
+            header {
+                font-size: 1rem;
+                justify-content: space-between;
+                background: var(--dark-blue);
+                padding: 0 1rem;
+                bottom: 50vh;
+            }
+            header div {
+                padding: 0 1rem;
+            }
+            header span {
+                display: none;
+            }
+            header svg {
+                display: block;
+            }
+            #header-bg {
+                display: none;
+            }
+            section#about {
+                background-image: url('static/images/alena high.png');
+                height: 88dvh;
+            }
+            .subsection {
+                width: 100vw;
+            }
+            .subsection.right, .subsection.left {
+                width: 100vw;
+                margin-left: 0;
+                margin-right: 0;
+            }
+        }
+    </style>
 </head>
-<body>
-
-<header>
-    <h1>Torыch - Portfolio</h1>
-    <p>Digital art | Editing</p>
+<body class="en-font">
+<header class="header">
+    <a href="#about"><div>
+        <span>About</span>
+        <svg width="800px" height="800px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <title>about</title><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="about-white" transform="translate(42.666667, 42.666667)"><path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape"></path></g></g>
+        </svg>
+    </div></a>
+    <a href="#portfolio"><div>
+        <span>Portfolio</span>
+        <svg height="800px" width="800px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463 463" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 463 463">
+            <g><path d="m407.5,88h-88.5v-32.5c0-21.78-17.72-39.5-39.5-39.5h-96c-21.78,0-39.5,17.72-39.5,39.5v32.5h-88.5c-30.603,0-55.5,24.897-55.5,55.5v128c0,12.99 6.305,24.533 16.013,31.736-0.003,0.089-0.013,0.175-0.013,0.264v88c0,30.603 24.897,55.5 55.5,55.5h320c30.603,0 55.5-24.897 55.5-55.5v-88c0-0.089-0.01-0.175-0.013-0.264 9.708-7.203 16.013-18.746 16.013-31.736v-128c0-30.603-24.897-55.5-55.5-55.5zm-248.5-32.5c0-13.509 10.99-24.5 24.5-24.5h96c13.51,0 24.5,10.991 24.5,24.5v32.5h-17v-32.5c0-4.142-3.357-7.5-7.5-7.5h-96c-4.143,0-7.5,3.358-7.5,7.5v32.5h-17v-32.5zm32,32.5v-25h81v25h-81zm241,303.5c0,22.332-18.168,40.5-40.5,40.5h-320c-22.332,0-40.5-18.168-40.5-40.5v-81.431c2.74,0.604 5.582,0.931 8.5,0.931h40.5v8.5c0,12.958 10.542,23.5 23.5,23.5h16c12.958,0 23.5-10.542 23.5-23.5v-8.5h177v8.5c0,12.958 10.542,23.5 23.5,23.5h16c12.958,0 23.5-10.542 23.5-23.5v-8.5h40.5c2.918,0 5.76-0.328 8.5-0.931v81.431zm-304-95.5h-33v-8.5c0-4.687 3.813-8.5 8.5-8.5h16c4.687,0 8.5,3.813 8.5,8.5v8.5zm0,15v8.5c0,4.687-3.813,8.5-8.5,8.5h-16c-4.687,0-8.5-3.813-8.5-8.5v-8.5h33zm240-15h-33v-8.5c0-4.687 3.813-8.5 8.5-8.5h16c4.687,0 8.5,3.813 8.5,8.5v8.5zm0,15v8.5c0,4.687-3.813,8.5-8.5,8.5h-16c-4.687,0-8.5-3.813-8.5-8.5v-8.5h33zm80-39.5c0,13.509-10.99,24.5-24.5,24.5h-40.5v-8.5c0-12.958-10.542-23.5-23.5-23.5h-16c-12.958,0-23.5,10.542-23.5,23.5v8.5h-177v-8.5c0-12.958-10.542-23.5-23.5-23.5h-16c-12.958,0-23.5,10.542-23.5,23.5v8.5h-40.5c-13.51,0-24.5-10.991-24.5-24.5v-128c0-22.332 18.168-40.5 40.5-40.5h352c22.332,0 40.5,18.168 40.5,40.5v128z"/></g>
+        </svg>
+    </div></a>
+    <a href="#commissions"><div>
+        <span>Commissions</span>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 401.601 401.6" xml:space="preserve">
+            <g><g><path d="M116.682,229.329c11.286,0,22.195-0.729,32.518-2.086V114.094c-10.322-1.356-21.232-2.085-32.518-2.085c-64.441,0-116.681,23.693-116.681,52.921v11.477C0.001,205.634,52.241,229.329,116.682,229.329z"/><path d="M116.682,288.411c11.286,0,22.195-0.729,32.518-2.084v-33.166c-10.325,1.356-21.229,2.095-32.518,2.095c-56.25,0-103.199-18.054-114.227-42.082c-1.606,3.5-2.454,7.124-2.454,10.839v11.477C0.001,264.718,52.241,288.411,116.682,288.411z"/><path d="M149.199,314.823v-2.578c-10.325,1.356-21.229,2.095-32.518,2.095c-56.25,0-103.199-18.054-114.227-42.082C0.848,275.757,0,279.381,0,283.096v11.477c0,29.229,52.24,52.922,116.681,52.922c12.887,0,25.282-0.95,36.873-2.7c-2.873-5.877-4.355-12.075-4.355-18.496V314.823z"/><path d="M284.92,22.379c-64.441,0-116.681,23.693-116.681,52.921v11.477c0,29.228,52.24,52.921,116.681,52.921c64.44,0,116.681-23.693,116.681-52.921V75.3C401.601,46.072,349.36,22.379,284.92,22.379z"/><path d="M284.92,165.626c-56.25,0-103.199-18.053-114.227-42.082c-1.606,3.499-2.454,7.123-2.454,10.839v11.477c0,29.228,52.24,52.921,116.681,52.921c64.44,0,116.681-23.693,116.681-52.921v-11.477c0-3.716-0.848-7.34-2.454-10.839C388.119,147.573,341.17,165.626,284.92,165.626z"/><path d="M284.92,224.71c-56.25,0-103.199-18.054-114.227-42.082c-1.606,3.499-2.454,7.123-2.454,10.839v11.477c0,29.229,52.24,52.922,116.681,52.922c64.44,0,116.681-23.693,116.681-52.922v-11.477c0-3.716-0.848-7.34-2.454-10.839C388.119,206.657,341.17,224.71,284.92,224.71z"/><path d="M284.92,286.983c-56.25,0-103.199-18.054-114.227-42.082c-1.606,3.5-2.454,7.123-2.454,10.838v11.478c0,29.228,52.24,52.921,116.681,52.921c64.44,0,116.681-23.693,116.681-52.921v-11.478c0-3.715-0.848-7.34-2.454-10.838C388.119,268.928,341.17,286.983,284.92,286.983z"/><path d="M284.92,346.066c-56.25,0-103.199-18.053-114.227-42.081c-1.606,3.5-2.454,7.125-2.454,10.838V326.3c0,29.228,52.24,52.921,116.681,52.921c64.44,0,116.681-23.693,116.681-52.921v-11.478c0-3.715-0.848-7.34-2.454-10.838C388.119,328.012,341.17,346.066,284.92,346.066z"/></g></g>
+        </svg>
+    </div></a>
+    <a href="#contact"><div>
+        <span>Contact info</span>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="800px" height="800px" viewBox="0 0 442 442" xml:space="preserve">
+            <g><path d="M105.4,221c0,9.391-7.609,17-17,17h-34c-9.391,0-17-7.609-17-17l0,0c0-9.391,7.609-17,17-17h34C97.792,204,105.4,211.609,105.4,221L105.4,221z M105.4,112.2c0-9.391-7.609-17-17-17h-34c-9.391,0-17,7.609-17,17l0,0c0,9.391,7.609,17,17,17h34C97.792,129.2,105.4,121.591,105.4,112.2L105.4,112.2z M105.4,329.801c0-9.393-7.609-17-17-17h-34c-9.391,0-17,7.607-17,17l0,0c0,9.391,7.609,17,17,17h34C97.792,346.801,105.4,339.191,105.4,329.801L105.4,329.801z M404.6,54.4v333.2c0,30.043-24.357,54.4-54.398,54.4h-238c-30.042,0-54.4-24.357-54.4-54.4V360.4h30.6c16.871,0,30.6-13.73,30.6-30.6c0-16.871-13.729-30.602-30.6-30.602H57.8v-47.6h30.6c16.871,0,30.6-13.729,30.6-30.6s-13.729-30.6-30.6-30.6H57.8v-47.6h30.6c16.871,0,30.6-13.729,30.6-30.6c0-16.871-13.729-30.6-30.6-30.6H57.8V54.4c0-30.042,24.358-54.4,54.4-54.4h238C380.242,0,404.6,24.357,404.6,54.4z M188.945,161.255c0,28.968,23.487,52.455,52.455,52.455c28.969,0,52.455-23.487,52.455-52.455c0-28.968-23.486-52.456-52.455-52.456C212.433,108.8,188.945,132.287,188.945,161.255z M323,289.482c0-32.184-26.098-58.283-58.283-58.283H218.09c-32.191,0-58.29,26.1-58.29,58.283v23.318H323V289.482z"/></g>
+        </svg>
+    </div></a>
 </header>
-
-<div id="devUnfinishedWarning" style="display: none; text-align: center;">
-    <p>&&Some texts are unfinished, please check the code.</p>
+<div id="devUnfinishedWarning">
+    <p>&amp;&amp;Some texts are unfinished, please check the code.</p>
 </div>
-
-<nav>
-    <a href="#portfolio">Portfolio</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact info</a>
-</nav>
-
-<section id="portfolio" class="section">
-    <h2>My Work</h2>
-    <div class="portfolio">
-        <img src="static/spidergirl.jpg" alt="Spidergirl">
-        <img src="static/patches.jpg" alt="Patches">
-        <img src="static/everythings fine.jpg" alt="Everything's fine">
-        <img src="static/makima is watching.jpg" alt="Makima is watching">
+<section id="about">
+    <div>
+        <h2>About me</h2>
+        <p></p>
     </div>
 </section>
-
-<section id="about" class="section">
+<div id="header-bg" class="header"></div>
+<section id="portfolio">
+    <br>
+    <div class="subsection left">
+        <div class="headline">
+            <h3>Sketch</h3>
+            <h4>(5-12$)</h4>
+        </div>
+        <div class="artfield" style="height: 320px">
+            <img id="jesustiger" src="static/images/jesustiger.jpg">
+            <img id="sliceoflife" src="static/images/sliceoflife.jpg">
+            <img id="fremine" src="static/images/fremine.png">
+        </div>
+    </div>
+    <br>
+    <div class="subsection right">
+        <div class="headline">
+            <h3>Flat Colour</h3>
+            <h4>(8-20$)</h4>
+        </div>
+        <div class="artfield"><img src="static/images/comingofage.png"><img src="static/images/leafknight.png"><img src="static/images/madscientist.png"></div>
+    </div>
+    <br>
+    <div class="subsection left">
+        <div class="headline">
+            <h3>Light Render</h3>
+            <h4>(12-30$)</h4>
+        </div>
+        <div class="artfield"><img src="static/images/thisisfine.jpg"><img src="static/images/greenaestetic.png"><img src="static/images/getototo.jpg"></div>
+    </div>
+    <br>
+    <div class="subsection right">
+        <div class="headline">
+            <h3>Full Render</h3>
+            <h4>(18-40$)</h4>
+        </div>
+        <div class="artfield"><img src="static/images/tomtord.jpg"><img src="static/images/happynewyear.png"><img src="static/images/spidergirl.jpg"><img src="static/images/everythings fine.jpg"></div>
+    </div>
+</section>
+<section id="commissions">
+    <div id="full-list">
+        <img alt="everythings fine.jpg" src="static\images\everythings fine.jpg"/>
+        <img alt="makima is watching.jpg" src="static\images\makima is watching.jpg"/>
+        <img alt="patches.jpg" src="static\images\patches.jpg"/>
+        <img alt="spidergirl.jpg" src="static\images\spidergirl.jpg"/>
+    </div>
+    <h2>My Work</h2>
+    <div class="portfolio" id="full-list">
+        
+    </div>
+</section>
+<section id="about">
     <h2>About Me</h2>
-    <p>
-        &&Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus perferendis impedit nulla porro voluptatem. Necessitatibus facilis earum vel non, iusto nemo, tenetur accusantium modi voluptates itaque nostrum, rem cupiditate dicta cumque ad libero assumenda iure?
-    </p>
+    <p>&amp;&amp;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus perferendis impedit nulla porro voluptatem. Necessitatibus facilis earum vel non, iusto nemo, tenetur accusantium modi voluptates itaque nostrum, rem cupiditate dicta cumque ad libero assumenda iure?</p>
 </section>
-
-<section id="contact" class="section">
+<section id="contact">
     <h2>Contact info:</h2>
-    <p>Email: <span>&&akylov7adil92@gmail.com</span></p>
-    <p>Phone: <span>&&+44 777 600 71 38</span></p>
+    <p>Email: <span>&amp;&amp;akylov7adil92@gmail.com</span></p>
+    <p>Phone: <span>&amp;&amp;+44 777 600 71 38</span></p>
 </section>
-
 <footer>
-    
 </footer>
-
+<script src="static/script.js"></script>
 <script>
-    const flag = '&'.repeat(2);
     const urlParams = new URLSearchParams(window.location.search);
-    const devUnfinishedWarning = document.getElementById('devUnfinishedWarning');
-    function highlightUnfinished(node) {
-        if (node.nodeType === Node.TEXT_NODE || !node.innerText.includes(flag)) return false;
-        const results = Array.from(node.childNodes).map(child => highlightUnfinished(child));
-        if (results.every(r => r === false)) {
-            devUnfinishedWarning.style.display = 'block';
-            node.style.color = 'red';
-            console.log('true', node);
-        }console.log('false', node);
-        return true;
-    }function fullTranslate(lang) {
-        fetch(`static/${lang}.json`).then(response => response.json()).then(data => {
-            // make every key in the dictionary lowercase
-            const dict = Object.fromEntries(Object.entries(data).map(([key, value]) => [key.toLowerCase(), value]));
-            translate(document.body, dict)
-        }).catch(error => console.error(`Error fetching dictionary ${lang}:`, error));
-    }if (urlParams.get('lang') && urlParams.get('lang') != "en")fullTranslate(urlParams.get('lang'));
-    const normalize = str => str.toLowerCase().replace(flag, '').trim();
-    function translate(node, dict) {
-        if (node.nodeType === Node.TEXT_NODE) {
-            const trans = dict[normalize(node.textContent)];
-            if (trans) node.textContent = trans;
-            else console.warn(`Translation not found for: ${node.textContent}`);
-        }node.childNodes.forEach(child => translate(child, dict));
+    if (urlParams.get('lang') && urlParams.get('lang') != "en")fullTranslate(urlParams.get('lang'));
+    if (urlParams.get('dev') && urlParams.get('dev') == "true")highlightUnfinished(document.body);
+    const header = document.getElementsByTagName('header')[0];
+    const headerHeight = header.clientHeight;
+    let disableUpdate = false;
+    const sections = [...document.getElementsByTagName('section')];
+    const nav = [...header.getElementsByTagName('a')];
+    const getSectionOffset = (section) => {
+        const rect = section.getBoundingClientRect();
+        let top = rect.top - window.innerHeight;
+        let bottom = rect.bottom;
+        let offset = 0;
+        if (top*bottom > 0) offset = Math.min(Math.abs(top), Math.abs(bottom));
+        return offset;
     }
-    if (urlParams.get('dev') && urlParams.get('dev') == "true") {
-        highlightUnfinished(document.body);
-    }
+    nav.forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            setTimeout(() => {
+                disableUpdate = true;
+                nav.forEach(lnk => lnk.classList.remove('highlight'));
+                link.classList.add('highlight');
+            }, getSectionOffset(targetSection) < 600 ? 100 : 250);
+            setTimeout(() => disableUpdate = false, 700);
+        });
+    });
+    function highlightSection() {
+        if (disableUpdate) return;
+        if (window.scrollY < window.innerHeight) {
+            nav.forEach(link => link.classList.remove('highlight'));
+            nav[0].classList.add('highlight');
+            return;
+        }
+        const currentSection = sections.find(section => section.getBoundingClientRect().bottom > headerHeight);
+        const prev_link = nav.find(link => link.classList.contains('highlight')) || nav[0];
+        const current_link = nav.find(link => link.getAttribute('href') === `#${currentSection.id}`);
+        prev_link.classList.remove('highlight');
+        current_link.classList.add('highlight');
+    }highlightSection();
+    function snapSection() {
+        return;
+        const viewportHeight = window.innerHeight;
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= headerHeight && rect.bottom > headerHeight) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    }window.addEventListener('scroll', () => {highlightSection();snapSection();});
 </script>
 </body>
 </html>
