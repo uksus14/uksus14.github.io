@@ -183,6 +183,57 @@
             bottom: 10%;
             left: 67%;
         }
+        #comingofage {
+            height: 90%;
+            left: 5%;
+            bottom: 5%;
+        }
+        #leafknight {
+            height: 67%;
+            right: 17.4%;
+            bottom: 5%;
+            z-index: 1;
+        }
+        #madscientist {
+            height: 67%;
+            top: 0%;
+            right: 5%;
+        }
+        #thisisfine {
+            width: 40%;
+            left: 5%;
+            bottom: 5%;
+        }
+        #greenaestetic {
+            height: 67%;
+            left: 47%;
+            top: -5%;
+        }
+        #getototo {
+            height: 50%;
+            right: 5%;
+            bottom: 5%;
+        }
+        #tomtord {
+            height: 45%;
+            left: 5%;
+            top: 2.5%;
+        }
+        #happynewyear {
+            height: 45%;
+            left: 45%;
+            top: 2.5%;
+        }
+        #spidergirl {
+            height: 45%;
+            left: 5%;
+            bottom: 2.5%;
+        }
+        #everythings-fine {
+            height: 45%;
+            left: 55%;
+            bottom: 2.5%;
+        }
         @media (max-width: 800px) {
             section#about {
                 background-image: url('static/images/alena high.png');
@@ -219,14 +270,11 @@
             header div {
                 padding: 0 1rem;
             }
-            header span {
+            header span, #header-bg {
                 display: none;
             }
             header svg {
                 display: block;
-            }
-            #header-bg {
-                display: none;
             }
             section#about {
                 background-image: url('static/images/alena high.png');
@@ -294,12 +342,16 @@
         </div>
     </div>
     <br>
-    <div class="subsection right">
+    <div class="subsection right" style="width: min(1000px, 100vw)">
         <div class="headline">
             <h3>Flat Colour</h3>
             <h4>(8-20$)</h4>
         </div>
-        <div class="artfield"><img src="static/images/comingofage.png"><img src="static/images/leafknight.png"><img src="static/images/madscientist.png"></div>
+        <div class="artfield">
+            <img id="comingofage" src="static/images/comingofage.png">
+            <img id="leafknight" src="static/images/leafknight.png">
+            <img id="madscientist" src="static/images/madscientist.png">
+        </div>
     </div>
     <br>
     <div class="subsection left">
@@ -307,7 +359,11 @@
             <h3>Light Render</h3>
             <h4>(12-30$)</h4>
         </div>
-        <div class="artfield"><img src="static/images/thisisfine.jpg"><img src="static/images/greenaestetic.png"><img src="static/images/getototo.jpg"></div>
+        <div class="artfield">
+            <img id="thisisfine" src="static/images/thisisfine.jpg">
+            <img id="greenaestetic" src="static/images/greenaestetic.png">
+            <img id="getototo" src="static/images/getototo.jpg">
+        </div>
     </div>
     <br>
     <div class="subsection right">
@@ -315,7 +371,12 @@
             <h3>Full Render</h3>
             <h4>(18-40$)</h4>
         </div>
-        <div class="artfield"><img src="static/images/tomtord.jpg"><img src="static/images/happynewyear.png"><img src="static/images/spidergirl.jpg"><img src="static/images/everythings fine.jpg"></div>
+        <div class="artfield" style="height: min(600px, 100vw);">
+            <img id="tomtord" src="static/images/tomtord.jpg">
+            <img id="happynewyear" src="static/images/happynewyear.png">
+            <img id="spidergirl" src="static/images/spidergirl.jpg">
+            <img id="everythings-fine" src="static/images/everythings-fine.jpg">
+        </div>
     </div>
 </section>
 <section id="commissions">

@@ -45,7 +45,7 @@
             const getHeight = row => gallery.clientWidth/getRatio(row);
             function buildImage(filename) {
                 const img = document.createElement('img');
-                img.src = `static/images/${filename}`;
+                img.src = `static/full-list/${filename}`;
                 img.alt = filename;
                 img.style.height = '100%';
                 return img;
