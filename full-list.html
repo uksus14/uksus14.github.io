@@ -15,8 +15,10 @@
                 background-color: #f4f4f4;
                 color: #333;
                 padding: 10px;
+                width: 100%;
             }
             #gallery {
+                width: 100%;
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
@@ -38,11 +40,13 @@
         <div id="gallery"></div>
         <script>
             const gallery = document.getElementById('gallery');
+            const galleryWidth = +window.getComputedStyle(gallery, null).getPropertyValue("width").replace('px', '');
+            console.log(galleryWidth);
             fetch('static/images-list.json').then(res => res.json())
                 .then(data => buildRows(data, bestLayout(data)))
                 .catch(error => console.error('There was a problem with the fetch operation:', error));
             const getRatio = row => row.reduce((acc, image) => acc + image.width / image.height, 0);
-            const getHeight = row => gallery.clientWidth/getRatio(row);
+            const getHeight = row => (galleryWidth-10*row.length)/getRatio(row);
             function buildImage(filename) {
                 const img = document.createElement('img');
                 img.src = `static/full-list/${filename}`;
@@ -63,7 +67,6 @@
                 }
             }function bestLayout(data) {
                 if (data.length == 0) return [];
-                if (data.length == 1) return [1];
                 for (let i of [3, 2, 4, 5, 1]) {
                     if (i > data.length) continue;
                     const next = bestLayout(data.slice(i));
